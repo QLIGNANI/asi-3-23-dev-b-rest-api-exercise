@@ -67,7 +67,6 @@ const generatePosts = async (count, userIds) => {
 const insertData = async () => {
   const db = knex(knexConfig)
   const roles = generateRole()
-  // console.log("database config:", users)
 
   try {
     const rolesRows = await db("roles").insert(roles).returning("id")
@@ -78,9 +77,6 @@ const insertData = async () => {
 
     const posts = await generatePosts(10, userIds)
     await db("posts").insert(posts)
-    console.log(" users inserted successfully")
-  } catch (error) {
-    console.log("error on insert data in database:", error)
   } finally {
     db.destroy()
   }
